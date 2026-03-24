@@ -1,9 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Hero } from '../components/home/Hero';
 import { TrustBar } from '../components/home/TrustBar';
+import { CorePillars } from '../components/home/CorePillars';
 import { initSmoothScroll } from '../lib/smooth-scroll';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Home() {
+  const mainRef = useRef<HTMLDivElement>(null);
+
   // Mount the infinite requestAnimationFrame Lenis loop dynamically when the home page renders
   useEffect(() => {
     const lenis = initSmoothScroll();
@@ -13,15 +21,30 @@ export default function Home() {
     };
   }, []);
 
+  useGSAP(() => {
+    if (!mainRef.current) return;
+    
+    // Day/Night Transition: Global background cross-fade from Dark to Light Mode 
+    // strictly executed as the Core Pillars grid breaches the viewport centerline.
+    gsap.to(mainRef.current, {
+      backgroundColor: "#f8fafc", // Tailwind slate-50 HEX mapping
+      color: "#0f172a", // Tailwind slate-900 mapping
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".core-pillars-trigger",
+        start: "top 65%",
+        end: "top 25%",
+        scrub: true,
+      }
+    });
+
+  }, { scope: mainRef });
+
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50">
+    <div ref={mainRef} className="flex flex-col min-h-screen bg-slate-950 transition-colors">
       <Hero />
       <TrustBar />
-      
-      {/* Temporary visual spacer to definitively test the pinned ScrollTrigger masking transition */}
-      <section className="relative z-20 h-[50vh] bg-slate-900 flex items-center justify-center">
-        <h2 className="text-4xl text-slate-400 font-bold opacity-50">Core Pillars Framework</h2>
-      </section>
+      <CorePillars />
     </div>
   );
 }

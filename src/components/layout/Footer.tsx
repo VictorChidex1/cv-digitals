@@ -22,7 +22,7 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="mt-8 flex flex-col items-center justify-between border-t border-slate-800 pt-8 text-xs text-slate-500 md:flex-row">
+        <div className="mt-4 flex flex-col items-center justify-between pt-4 text-xs text-slate-500 md:flex-row">
           <p>&copy; {new Date().getFullYear()} CV Digitals. All rights reserved.</p>
           <div className="mt-4 space-x-4 md:mt-0">
             <a href="#" className="transition-colors hover:text-white">Privacy Policy</a>
