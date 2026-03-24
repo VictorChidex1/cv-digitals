@@ -73,7 +73,7 @@ export function Hero() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative min-h-screen bg-slate-950 text-slate-50 overflow-hidden flex items-center pt-20">
+    <section ref={containerRef} className="relative min-h-screen bg-slate-950 text-slate-50 overflow-hidden flex flex-col justify-center pt-32 pb-20 lg:pt-28 lg:pb-24">
       
       {/* Deep Cinematic Lighting Backdrop */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-900/20 via-slate-950 to-slate-950 z-0"></div>

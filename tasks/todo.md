@@ -26,3 +26,10 @@
 - [x] Construct `Hero.tsx` layout (Dark Mode + Glassmorphism).
 - [x] Implement initial load fades and floating effects.
 - [x] Implement GSAP ScrollTrigger "Mind-Blow" zoom effect.
+
+**Step 4 Sub-Tasks (Trust Bar):**
+- [x] Build Trust Bar Layout framework in dark mode.
+- [x] Apply CSS `mask-image` (Abyss effect).
+- [x] Import absolute client Logos (`canman, foodflow, veravox, novluma, kudiflow, oxygen-health`).
+- [x] Construct `opacity/grayscale` ghosting states perfectly fading into high-density CV Emerald glows.
+- [x] Link Tailwind CSS marquee animation orchestration to DOM element.
