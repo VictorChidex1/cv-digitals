@@ -15,65 +15,80 @@ export function Hero() {
   useGSAP(() => {
     if (!textColumnRef.current || !imageColumnRef.current || !imageWrapperRef.current) return;
 
-    // --- 1. Initial Mount Animation Sequence ---
-    const tl = gsap.timeline();
-    
-    // Authority Badge pop-in
-    tl.fromTo(
-      textColumnRef.current.children[0],
-      { y: 20, opacity: 0, scale: 0.95 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
-    );
+    const mm = gsap.matchMedia();
 
-    // Slide up and fade in the headline, subtext, and buttons sequentially
-    tl.fromTo(
-      Array.from(textColumnRef.current.children).slice(1),
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out" },
-      "-=0.4"
-    );
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)"
+    }, (context) => {
+      const { isDesktop } = context.conditions as { isDesktop: boolean };
 
-    // Subtle, continuous floating breathing effect
-    gsap.to(imageColumnRef.current, {
-      y: -12,
-      duration: 4,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
-    });
+      // --- 1. Initial Mount Animation Sequence ---
+      const tl = gsap.timeline();
+      
+      tl.fromTo(
+        textColumnRef.current!.children[0],
+        { y: 20, opacity: 0, scale: 0.95 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
+      );
 
-    // --- 2. Cinematic ScrollTrigger Choreography ---
-    const scrollTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=150%",
-        scrub: 1,
-        pin: true,
+      tl.fromTo(
+        Array.from(textColumnRef.current!.children).slice(1),
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" },
+        "-=0.4"
+      );
+
+      // Execute floating drift ONLY on desktop to conserve mobile battery & DOM recalculation bounds
+      if (isDesktop && imageColumnRef.current) {
+        gsap.to(imageColumnRef.current, {
+          y: -12,
+          duration: 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      }
+
+      // --- 2. Safe Internal Parallax Choreography (NO PINNING) ---
+      // We specifically animate the internal <img> tag so it mathematically CANNOT bleed out of its glass border container.
+      const imageElement = imageWrapperRef.current!.querySelector('img');
+      
+      if (imageElement) {
+        gsap.to(imageElement, {
+          scale: isDesktop ? 1.5 : 1.2, // Smooth, contained cinematic zoom
+          y: isDesktop ? 40 : 20,       // Parallax push down tracking the scroll
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            // CRITICAL FIX: Deleted `pin: true` which natively prevents GSAP from mutating the document length and breaking the footer placement entirely.
+          }
+        });
+      }
+
+      // Fade the left text cleanly into the dark background on scroll (Desktop only)
+      if (isDesktop && textColumnRef.current) {
+        gsap.to(textColumnRef.current, {
+          opacity: 0,
+          y: -50,
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "center top",
+            scrub: true,
+          }
+        });
       }
     });
-
-    // Fade out and translate text column backward with a cinematic blur
-    scrollTl.to(textColumnRef.current, {
-      opacity: 0,
-      x: -100,
-      filter: "blur(10px)",
-      ease: "power2.in",
-      duration: 1
-    }, 0);
-
-    // Explode the image container out of its refined glass box to engulf the viewport
-    scrollTl.to(imageWrapperRef.current, {
-      scale: 30,
-      borderRadius: 0,
-      ease: "power2.inOut",
-      duration: 2
-    }, 0);
 
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative min-h-screen bg-slate-950 text-slate-50 overflow-hidden flex flex-col justify-center pt-32 pb-20 lg:pt-28 lg:pb-24">
+    <section ref={containerRef} className="relative min-h-screen bg-slate-950 text-slate-50 overflow-hidden flex flex-col justify-center pt-32 pb-20 lg:pt-28 lg:pb-24 isolate transform-gpu z-10 w-full">
       
       {/* Deep Cinematic Lighting Backdrop */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-900/20 via-slate-950 to-slate-950 z-0"></div>
