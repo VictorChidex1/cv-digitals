@@ -18,17 +18,25 @@ export function Hero() {
     // --- 1. Initial Mount Animation Sequence ---
     const tl = gsap.timeline();
     
-    // Slide up and fade in the headline and buttons sequentially
+    // Authority Badge pop-in
     tl.fromTo(
-      textColumnRef.current.children,
-      { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "power3.out" }
+      textColumnRef.current.children[0],
+      { y: 20, opacity: 0, scale: 0.95 },
+      { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
     );
 
-    // Subtle, continuous floating breathing effect for the entire right column
+    // Slide up and fade in the headline, subtext, and buttons sequentially
+    tl.fromTo(
+      Array.from(textColumnRef.current.children).slice(1),
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out" },
+      "-=0.4"
+    );
+
+    // Subtle, continuous floating breathing effect
     gsap.to(imageColumnRef.current, {
-      y: -15,
-      duration: 3,
+      y: -12,
+      duration: 4,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut"
@@ -38,24 +46,25 @@ export function Hero() {
     const scrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top top",     // Pin exactly when section hits the top of the viewport
-        end: "+=150%",        // Stay pinned for 1.5x the height of the screen
-        scrub: 1,             // Smoothly tie animation to user scroll delta
-        pin: true,            // Lock the container in place
+        start: "top top",
+        end: "+=150%",
+        scrub: 1,
+        pin: true,
       }
     });
 
-    // Mask text backwards as the user scrolls
+    // Fade out and translate text column backward with a cinematic blur
     scrollTl.to(textColumnRef.current, {
       opacity: 0,
-      x: -50,
-      ease: "power1.inOut",
+      x: -100,
+      filter: "blur(10px)",
+      ease: "power2.in",
       duration: 1
     }, 0);
 
-    // Explode the image container out of its rounded box to essentially swallow the viewport
+    // Explode the image container out of its refined glass box to engulf the viewport
     scrollTl.to(imageWrapperRef.current, {
-      scale: 25,
+      scale: 30,
       borderRadius: 0,
       ease: "power2.inOut",
       duration: 2
@@ -64,52 +73,94 @@ export function Hero() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative min-h-screen bg-slate-900 text-slate-50 overflow-hidden flex items-center pt-20">
+    <section ref={containerRef} className="relative min-h-screen bg-slate-950 text-slate-50 overflow-hidden flex items-center pt-20">
+      
+      {/* Deep Cinematic Lighting Backdrop */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-900/20 via-slate-950 to-slate-950 z-0"></div>
+      
+      {/* High-End Subsurface Film Grain */}
+      <div className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        {/* Establish our clean Two-Column Desktop layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center justify-between min-h-[75vh]">
           
           {/* Left Column: Typography & CTAs */}
-          <div ref={textColumnRef} className="flex flex-col space-y-6 z-10">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
-              Building High-Performance <span className="text-emerald-500">Digital</span> Experiences & Amplifying <span className="text-amber-500">Brands</span>
+          <div ref={textColumnRef} className="flex flex-col z-10 items-start">
+            
+            {/* The Authority Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(5,150,105,0.2)]">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></span>
+              <span className="text-[10px] md:text-xs font-semibold tracking-wider text-emerald-300 uppercase">
+                Premier Digital Agency Matrix
+              </span>
+            </div>
+
+            {/* Headline with Apple-Style Metallic Sheen */}
+            <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold tracking-tight leading-[1.05] mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-slate-100 to-slate-400">
+                Building High-Performance
+              </span>
+              <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600 drop-shadow-sm">
+                Digital
+              </span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-slate-100 to-slate-400">
+                {" "}Experiences & Amplifying{" "}
+              </span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-br from-amber-400 to-amber-600 drop-shadow-[0_0_15px_rgba(245,158,11,0.4)]">
+                Brands
+              </span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-300 max-w-xl font-light">
+
+            <p className="text-lg md:text-xl text-slate-400 max-w-xl font-light leading-relaxed mb-8">
               We operate at the precise intersection of elite web development, powerful music promotion, and premier event management.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+
+            {/* Ultra-Tactile SaaS Buttons */}
+            <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
               <Link 
                 to="/services" 
-                className="inline-flex flex-shrink-0 items-center justify-center rounded-md bg-emerald-600 px-8 py-3 text-base font-bold text-white shadow-lg transition-all hover:bg-emerald-700 hover:-translate-y-1"
+                className="group relative inline-flex flex-shrink-0 items-center justify-center rounded-xl px-8 py-3.5 text-base font-semibold text-white transition-all shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),_0_0_20px_rgba(5,150,105,0.4)] bg-gradient-to-b from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),_0_0_30px_rgba(5,150,105,0.6)] border border-emerald-800"
               >
                 View Our Services
+                <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
               </Link>
+              
               <Link 
                 to="/contact" 
-                className="inline-flex flex-shrink-0 items-center justify-center rounded-md border-2 border-amber-500 bg-transparent px-8 py-3 text-base font-bold text-amber-500 shadow-sm transition-all hover:bg-amber-500/10 hover:-translate-y-1"
+                className="inline-flex flex-shrink-0 items-center justify-center rounded-xl border border-amber-500/40 bg-amber-500/5 backdrop-blur-md px-8 py-3.5 text-base font-semibold text-amber-400 shadow-sm transition-all hover:bg-amber-500/15 hover:border-amber-400 hover:text-amber-300 hover:-translate-y-0.5 hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]"
               >
                 Book a Consultation
               </Link>
             </div>
           </div>
 
-          {/* Right Column: Visual Glassmorphism Concept */}
-          <div ref={imageColumnRef} className="relative flex items-center justify-center mt-12 md:mt-0 lg:ml-auto w-full max-w-lg mx-auto">
+          {/* Right Column: Multi-Layered Glassmorphism Bezel */}
+          <div ref={imageColumnRef} className="relative flex items-center justify-center mt-16 md:mt-0 lg:ml-auto w-full max-w-lg mx-auto">
             
-            {/* Ambient Background Glow (Mix-blend screen generates high-end cinematic bleeding) */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-600/30 to-amber-500/30 rounded-full blur-[80px] -z-10 mix-blend-screen scale-125"></div>
+            {/* Massive Ambient Core Lighting */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-tr from-emerald-600/40 via-transparent to-amber-500/30 rounded-full blur-[90px] -z-10 mix-blend-screen scale-150 pointer-events-none"></div>
             
-            {/* The primary image scaling target housing the asset */}
+            {/* Outer Glass Bezel (Scaling Target for GSAP Mind-Blow) */}
             <div 
               ref={imageWrapperRef} 
-              className="relative w-full aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(5,150,105,0.3)] ring-1 ring-white/10 origin-center transform-gpu"
+              className="relative p-2 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] origin-center transform-gpu"
             >
-              <img 
-                src="/assets/cv-digital-hero.jpeg" 
-                alt="CV Digitals Brand Hero" 
-                className="w-full h-full object-cover scale-105"
-              />
+              {/* Inner Image Mask/Container */}
+              <div className="relative w-full aspect-[4/5] md:aspect-[4/4] rounded-[2rem] overflow-hidden ring-1 ring-white/10 bg-slate-900 shadow-inner">
+                <img 
+                  src="/assets/cv-digital-hero.jpeg" 
+                  alt="CV Digitals Elite Asset" 
+                  className="w-full h-full object-cover scale-[1.02] opacity-90 transition-all duration-700 hover:scale-105 hover:opacity-100"
+                />
+                
+                {/* Surface Reflection Highlight */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-60 z-10 pointer-events-none"></div>
+              </div>
             </div>
+
           </div>
 
         </div>
