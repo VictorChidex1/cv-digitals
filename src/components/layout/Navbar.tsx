@@ -17,11 +17,11 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between md:h-24">
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center gap-2">
+            <Link to="/" className="block py-4 pr-16 md:pr-24 relative z-10 cursor-pointer">
               <img
                 src="/assets/cv-digital-logo.png"
                 alt="CV Digitals Logo"
-                className="h-16 w-auto object-contain py-2 scale-[2.5] origin-left md:scale-[3.5] pointer-events-none"
+                className="h-12 w-auto md:h-16 object-contain scale-[2.5] origin-left md:scale-[3.5]"
               />
             </Link>
           </div>

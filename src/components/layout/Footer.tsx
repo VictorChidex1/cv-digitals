@@ -12,11 +12,11 @@ export function Footer() {
           
           {/* 1. Left Graphic & Digital Synopsis */}
           <div className="flex w-full max-w-sm flex-col items-start text-left">
-            <Link to="/" className="flex items-center gap-2 mb-8">
+            <Link to="/" className="block cursor-pointer mb-8 py-4 pr-16 md:pr-24">
               <img 
                 src="/assets/cv-digital-logo.png" 
                 alt="CV Digitals Logo" 
-                className="h-16 w-auto object-contain py-2 scale-[2.5] origin-left md:scale-[3.5] pointer-events-none drop-shadow-lg" 
+                className="h-12 w-auto md:h-16 object-contain scale-[2.5] origin-left md:scale-[3.5] drop-shadow-lg" 
               />
             </Link>
             <p className="text-base md:text-lg font-light leading-relaxed text-slate-400 drop-shadow-sm group">

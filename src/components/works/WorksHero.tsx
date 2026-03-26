@@ -59,7 +59,7 @@ export function WorksHero() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative w-full h-[90vh] md:h-screen flex flex-col items-center justify-center bg-slate-950 overflow-hidden">
+    <section ref={containerRef} className="relative w-full min-h-[60vh] md:min-h-[70vh] flex flex-col items-center justify-center bg-slate-950 overflow-hidden pt-32 pb-24">
       
       {/* Absolute Cinematic Image Container mapped strictly to GPU operations tracking User Request image */}
       <div className="absolute inset-0 z-0 pointer-events-none w-full h-[120%] -top-[10%] left-0 overflow-hidden bg-slate-950">
