@@ -109,11 +109,16 @@ export function ContactTerminal() {
              </div>
 
              {/* RIGHT COLUMN: The Glassmorphism Terminal */}
-             <div className="col-span-1 lg:col-span-8 bg-slate-900/50 backdrop-blur-3xl border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 shadow-2xl relative overflow-hidden">
+             <div className="col-span-1 lg:col-span-8 bg-slate-900/40 backdrop-blur-3xl border border-white/5 rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 shadow-2xl relative overflow-hidden">
+                
+                {/* 100k Agency Dynamic Ambient Mesh Lighting natively expanding behind the Glass */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen opacity-40 animate-[pulse_8s_ease-in-out_infinite]"></div>
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen opacity-40"></div>
+                
                 {/* Visual Glare */}
                 <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
                 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 relative z-10 w-full">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-10 relative z-10 w-full">
                    
                    {errorMsg && (
                       <div className="w-full bg-red-500/10 border border-red-500/30 rounded-xl p-4 flex items-center gap-3">
@@ -122,50 +127,50 @@ export function ContactTerminal() {
                       </div>
                    )}
 
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {/* Name Matrix */}
-                      <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest font-mono font-bold text-slate-500">Operational Designation (Name)</label>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+                      {/* Name Matrix - High Visibility Boxed Inputs */}
+                      <div className="space-y-2 relative">
+                        <label className="text-xs uppercase tracking-widest font-mono font-bold text-slate-300 block">Operational Designation (Name)</label>
                         <input 
                           {...register("name")}
                           type="text" 
                           placeholder="Your Name"
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all font-light"
+                          className="w-full bg-slate-950/80 border border-white/20 rounded-xl px-5 py-4 text-white md:text-xl focus:outline-none focus:border-blue-500 focus:bg-slate-900 focus:ring-1 focus:ring-blue-500/50 transition-all font-medium placeholder:text-slate-500"
                         />
-                        {errors.name && <span className="text-red-400 text-xs font-mono">{errors.name.message}</span>}
+                        {errors.name && <span className="text-red-400 text-xs font-mono absolute -bottom-6 left-0">{errors.name.message}</span>}
                       </div>
 
-                      {/* Email Matrix */}
-                      <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest font-mono font-bold text-slate-500">Secure Channel (Email)</label>
+                      {/* Email Matrix - High Visibility Boxed Inputs */}
+                      <div className="space-y-2 relative">
+                        <label className="text-xs uppercase tracking-widest font-mono font-bold text-slate-300 block">Secure Channel (Email)</label>
                         <input 
                           {...register("email")}
                           type="email" 
                           placeholder="Transmission Address"
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all font-light"
+                          className="w-full bg-slate-950/80 border border-white/20 rounded-xl px-5 py-4 text-white md:text-xl focus:outline-none focus:border-blue-500 focus:bg-slate-900 focus:ring-1 focus:ring-blue-500/50 transition-all font-medium placeholder:text-slate-500"
                         />
-                        {errors.email && <span className="text-red-400 text-xs font-mono">{errors.email.message}</span>}
+                        {errors.email && <span className="text-red-400 text-xs font-mono absolute -bottom-6 left-0">{errors.email.message}</span>}
                       </div>
                    </div>
 
                    {/* Scope Logic */}
-                   <div className="space-y-4">
-                     <label className="text-[10px] uppercase tracking-widest font-mono font-bold text-slate-500">Operation Scope</label>
+                   <div className="space-y-3 pt-4">
+                     <label className="text-xs uppercase tracking-widest font-mono font-bold text-slate-300 block">Operation Scope</label>
                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <button 
                            type="button"
                            onClick={() => setValue("scope", "software", { shouldValidate: true })}
-                           className={`p-4 rounded-xl border flex items-center justify-between transition-all ${watchScope === 'software' ? 'bg-blue-500/10 border-blue-500 text-white' : 'bg-slate-950 border-white/10 text-slate-400 hover:border-white/30'}`}
+                           className={`p-4 rounded-xl border flex items-center justify-between transition-all ${watchScope === 'software' ? 'bg-blue-500/10 border-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.2)]' : 'bg-slate-950/80 border-white/20 text-slate-300 hover:border-white/40 hover:bg-slate-900'}`}
                         >
-                           <span className="font-bold">System Architecture</span>
+                           <span className="font-bold text-base md:text-lg">System Architecture</span>
                            {watchScope === 'software' && <Globe2 className="w-5 h-5 text-blue-500" />}
                         </button>
                         <button 
                            type="button"
                            onClick={() => setValue("scope", "audio", { shouldValidate: true })}
-                           className={`p-4 rounded-xl border flex items-center justify-between transition-all ${watchScope === 'audio' ? 'bg-emerald-500/10 border-emerald-500 text-white' : 'bg-slate-950 border-white/10 text-slate-400 hover:border-white/30'}`}
+                           className={`p-4 rounded-xl border flex items-center justify-between transition-all ${watchScope === 'audio' ? 'bg-emerald-500/10 border-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.2)]' : 'bg-slate-950/80 border-white/20 text-slate-300 hover:border-white/40 hover:bg-slate-900'}`}
                         >
-                           <span className="font-bold">Audio Networking</span>
+                           <span className="font-bold text-base md:text-lg">Audio Networking</span>
                            {watchScope === 'audio' && <Globe2 className="w-5 h-5 text-emerald-500" />}
                         </button>
                      </div>
@@ -173,27 +178,27 @@ export function ContactTerminal() {
                    </div>
 
                    {/* Budget Matrix */}
-                   <div className="space-y-4">
-                     <label className="text-[10px] uppercase tracking-widest font-mono font-bold text-slate-500">Funding Tier</label>
+                   <div className="space-y-3 pt-6">
+                     <label className="text-xs uppercase tracking-widest font-mono font-bold text-slate-300 block">Funding Tier</label>
                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <button 
                            type="button"
                            onClick={() => setValue("budget", "startup", { shouldValidate: true })}
-                           className={`p-4 rounded-xl border font-mono text-sm transition-all text-center ${watchBudget === 'startup' ? 'bg-white/10 border-white text-white font-bold' : 'bg-slate-950 border-white/10 text-slate-400 hover:border-white/30'}`}
+                           className={`p-4 rounded-xl border font-mono text-base transition-all text-center ${watchBudget === 'startup' ? 'bg-white/10 border-white text-white font-bold shadow-[0_0_20px_rgba(255,255,255,0.1)]' : 'bg-slate-950/80 border-white/20 text-slate-300 hover:border-white/40 hover:bg-slate-900'}`}
                         >
                            &lt; $5k
                         </button>
                         <button 
                            type="button"
                            onClick={() => setValue("budget", "enterprise", { shouldValidate: true })}
-                           className={`p-4 rounded-xl border font-mono text-sm transition-all text-center ${watchBudget === 'enterprise' ? 'bg-white/10 border-white text-white font-bold' : 'bg-slate-950 border-white/10 text-slate-400 hover:border-white/30'}`}
+                           className={`p-4 rounded-xl border font-mono text-base transition-all text-center ${watchBudget === 'enterprise' ? 'bg-white/10 border-white text-white font-bold shadow-[0_0_20px_rgba(255,255,255,0.1)]' : 'bg-slate-950/80 border-white/20 text-slate-300 hover:border-white/40 hover:bg-slate-900'}`}
                         >
                            $5k - $20k
                         </button>
                         <button 
                            type="button"
                            onClick={() => setValue("budget", "global", { shouldValidate: true })}
-                           className={`p-4 rounded-xl border font-mono text-sm transition-all text-center ${watchBudget === 'global' ? 'bg-white/10 border-white text-white font-bold' : 'bg-slate-950 border-white/10 text-slate-400 hover:border-white/30'}`}
+                           className={`p-4 rounded-xl border font-mono text-base transition-all text-center ${watchBudget === 'global' ? 'bg-white/10 border-white text-white font-bold shadow-[0_0_20px_rgba(255,255,255,0.1)]' : 'bg-slate-950/80 border-white/20 text-slate-300 hover:border-white/40 hover:bg-slate-900'}`}
                         >
                            $20k +
                         </button>
@@ -201,33 +206,33 @@ export function ContactTerminal() {
                      {errors.budget && <span className="text-red-400 text-xs font-mono block">{errors.budget.message}</span>}
                    </div>
 
-                   {/* Payload Node */}
-                   <div className="space-y-2">
-                     <label className="text-[10px] uppercase tracking-widest font-mono font-bold text-slate-500">Project Objective (Payload)</label>
+                   {/* Payload Node Textarea Array */}
+                   <div className="space-y-2 relative pt-6">
+                     <label className="text-xs uppercase tracking-widest font-mono font-bold text-slate-300 block">Project Objective (Payload)</label>
                      <textarea 
                        {...register("objective")}
                        placeholder="Detail the operational limitations we are breaking through..."
-                       rows={5}
-                       className="w-full bg-slate-950 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all font-light resize-none"
+                       rows={4}
+                       className="w-full bg-slate-950/80 border border-white/20 rounded-xl px-5 py-4 text-white md:text-xl focus:outline-none focus:border-blue-500 focus:bg-slate-900 focus:ring-1 focus:ring-blue-500/50 transition-all font-medium placeholder:text-slate-500 resize-none"
                      ></textarea>
-                     {errors.objective && <span className="text-red-400 text-xs font-mono">{errors.objective.message}</span>}
+                     {errors.objective && <span className="text-red-400 text-xs font-mono absolute -bottom-5 left-0">{errors.objective.message}</span>}
                    </div>
 
-                   {/* Transmit Button */}
+                   {/* Transmit Button - High End Glassmorphic Trigger */}
                    <button 
                      type="submit" 
                      disabled={isTransmitting}
-                     className="w-full group relative flex items-center justify-center gap-3 bg-white text-slate-950 font-bold uppercase tracking-widest text-sm py-5 rounded-xl overflow-hidden active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                     className="w-full mt-6 group relative flex items-center justify-center gap-3 bg-gradient-to-tr from-slate-900 to-slate-800 border border-white/10 text-white font-bold uppercase tracking-widest text-sm py-6 rounded-2xl overflow-hidden active:scale-[0.98] transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] disabled:opacity-50 disabled:cursor-not-allowed"
                    >
-                      <div className="absolute inset-0 bg-blue-500 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0"></div>
-                      <span className="relative z-10 group-hover:text-white transition-colors duration-300 flex items-center gap-2">
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out z-0"></div>
+                      <span className="relative z-10 flex items-center gap-2 drop-shadow-md">
                         {isTransmitting ? (
                           <>
                             <Loader2 className="w-5 h-5 animate-spin" /> Transmitting...
                           </>
                         ) : (
                           <>
-                            Transmit Coordinates <Send className="w-4 h-4" />
+                            Transmit Coordinates <Send className="w-4 h-4 ml-2" />
                           </>
                         )}
                       </span>
