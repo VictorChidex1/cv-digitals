@@ -7,6 +7,7 @@ import { TrustBar } from '../components/home/TrustBar';
 import { CorePillars } from '../components/home/CorePillars';
 import { Metrics } from '../components/home/Metrics';
 import { Showcase } from '../components/home/Showcase';
+import { CTA } from '../components/home/CTA';
 import { initSmoothScroll } from '../lib/smooth-scroll';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -49,6 +50,7 @@ export default function Home() {
       <CorePillars />
       <Metrics />
       <Showcase />
+      <CTA />
     </div>
   );
 }
