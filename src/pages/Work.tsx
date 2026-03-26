@@ -1,8 +1,22 @@
+import { useEffect } from 'react';
+import { WorksHero } from '../components/works/WorksHero';
+import { WorksMatrix } from '../components/works/WorksMatrix';
+import { CTA } from '../components/home/CTA';
+import { initSmoothScroll } from '../lib/smooth-scroll';
+
 export default function Work() {
+  useEffect(() => {
+    initSmoothScroll();
+    // Native enforcement mapping absolute route resets to viewport Zero
+    window.scrollTo(0, 0); 
+  }, []);
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      <h1 className="text-4xl font-bold text-slate-900">Our Work</h1>
-      <p className="mt-4 text-slate-600">Project galleries and case studies.</p>
+    <div className="w-full bg-slate-950 min-h-screen">
+      <WorksHero />
+      <WorksMatrix />
+      {/* Absolute bridging overlapping negative margins precisely over the trailing dark mode matrices */}
+      <CTA />
     </div>
   );
 }
