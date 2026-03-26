@@ -5,10 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const phases = [
-  { step: "01", title: "Discovery Matrix", desc: "We map your exact vertical, auditing competitors and locating vectors for absolute digital dominance." },
-  { step: "02", title: "System Architecture", desc: "Constructing the wireframes, integrating the React engines, and mapping raw backend Firebase database clusters." },
-  { step: "03", title: "Execution Deployment", desc: "Engineering the production buildup. No templates. Pure, high-performance VITE/Node.js architecture deployed at scale." },
-  { step: "04", title: "Market Domination", desc: "Pushing to live domains natively, initializing algorithmic SEO maps, and securing global endpoint operations indefinitely." },
+  { step: "01", title: "Discovery Matrix", desc: "We map your exact vertical, auditing competitors and locating vectors for absolute dominance across web platforms, streaming DSP algorithms, and live event networks." },
+  { step: "02", title: "Infrastructure Blueprint", desc: "Constructing the React/Firebase web platforms, mapping Spotify algorithmic scaling clusters, and drafting physical live-event staging blueprints." },
+  { step: "03", title: "Execution & Deployment", desc: "Deploying high-performance VITE/Node.js tech stacks, executing viral audio seeding sequences, and launching massive global ticketing ledgers natively." },
+  { step: "04", title: "Omnichannel Domination", desc: "Pushing live digital corporate platforms, triggering algorithmic audio playlisting multipliers, and securing flawless, sold-out physical experiences globally." },
 ]
 
 export function ServicesProcess() {
