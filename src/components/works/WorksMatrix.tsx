@@ -4,8 +4,9 @@ import {
   ArrowUpRight,
   CheckCircle2,
   TrendingUp,
-  Mic2,
   Star,
+  ArrowRight,
+  ArrowLeft
 } from "lucide-react";
 
 // Web Project Architecture Array
@@ -107,6 +108,7 @@ const artists = [
   {
     id: 1,
     name: "Sky D",
+    image: "/assets/skyd.jpg",
     milestone: "50M+ Algorithmic Streams",
     desc: "Comprehensive Spotify Algorithmic Mapping & Viral Seed Campaign Execution resulting in massive global demographic captures.",
     metrics: [
@@ -118,6 +120,7 @@ const artists = [
   {
     id: 2,
     name: "Graceboy Micl",
+    image: "/assets/graceboymicl.jpg",
     milestone: "#1 Regional Apple Music",
     desc: "Digital Portfolio Architecture & DSP Networking strategies executing strict organic fan acquisition funnels.",
     metrics: ["Apple Music", "Fan Funnels", "Conversion Mapping"],
@@ -125,6 +128,7 @@ const artists = [
   {
     id: 3,
     name: "Raploard",
+    image: "/assets/raploard.jpg",
     milestone: "Sold-Out EU Tour Operations",
     desc: "End-to-end routing of Event Architectures mapping strict automated ticketing ledgers resolving 100% capacity.",
     metrics: ["Tour Physics", "Ticketing Ledgers", "Sold-Out Scale"],
@@ -132,6 +136,7 @@ const artists = [
   {
     id: 4,
     name: "De Kingz",
+    image: "/assets/dekingz.jpg",
     milestone: "20M+ YouTube Views",
     desc: "High-Frequency Asset Deployment tracking pure visual optimization translating explicit click-through-rate dominance.",
     metrics: ["CTR Optimization", "YouTube Algorithms", "Asset Deployment"],
@@ -139,6 +144,7 @@ const artists = [
   {
     id: 5,
     name: "eminla",
+    image: "/assets/eminla.jpeg",
     milestone: "15M+ TikTok Creations",
     desc: "Advanced Algorithmic For-You-Page indexing linking flawless audio mapping vectors across the short-form ecosystem.",
     metrics: ["Algorithm Hooks", "FYP Tracking", "Short-Form Scale"],
@@ -147,6 +153,18 @@ const artists = [
 
 export function WorksMatrix() {
   const [activeTab, setActiveTab] = useState<"web" | "audio">("web");
+  const [webPage, setWebPage] = useState(1);
+  const [audioPage, setAudioPage] = useState(1);
+
+  const WEB_PER_PAGE = 9;
+  const AUDIO_PER_PAGE = 6;
+
+  const maxWebPages = Math.ceil(projects.length / WEB_PER_PAGE);
+  const maxAudioPages = Math.ceil(artists.length / AUDIO_PER_PAGE);
+
+  const displayedWeb = projects.slice((webPage - 1) * WEB_PER_PAGE, webPage * WEB_PER_PAGE);
+  const displayedAudio = artists.slice((audioPage - 1) * AUDIO_PER_PAGE, audioPage * AUDIO_PER_PAGE);
+
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLElement>(null);
   const imageRevealRef = useRef<HTMLDivElement>(null);
@@ -275,7 +293,7 @@ export function WorksMatrix() {
         {/* STATE 01: SYSTEM ARCHITECTURE (WEB) */}
         {activeTab === "web" && (
           <div className="w-full flex flex-col relative z-10">
-            {projects.map((proj, i) => (
+            {displayedWeb.map((proj, i) => (
               <a
                 key={proj.id}
                 href={proj.link}
@@ -289,7 +307,7 @@ export function WorksMatrix() {
 
                 <div className="flex flex-col lg:flex-row items-baseline gap-4 md:gap-16 z-10 w-full lg:w-auto">
                   <span className="font-mono text-sm md:text-lg font-bold text-slate-700 transition-colors group-hover:text-blue-500">
-                    {i < 9 ? `0${i + 1}` : i + 1}
+                    {((webPage - 1) * WEB_PER_PAGE) + i < 9 ? `0${((webPage - 1) * WEB_PER_PAGE) + i + 1}` : ((webPage - 1) * WEB_PER_PAGE) + i + 1}
                   </span>
                   <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-slate-300 tracking-tighter transition-all duration-500 lg:group-hover:text-white lg:group-hover:translate-x-6 z-10">
                     {proj.title}
@@ -330,6 +348,39 @@ export function WorksMatrix() {
                 </div>
               </a>
             ))}
+
+            {/* Strict Pagination Mechanics for System Architecture */}
+            {maxWebPages > 1 && (
+              <div className="w-full flex items-center justify-between px-4 md:px-12 py-12 border-t border-white/5">
+                <button 
+                  onClick={() => {
+                    setWebPage(p => Math.max(1, p - 1));
+                    window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: "smooth" });
+                  }}
+                  disabled={webPage === 1}
+                  className="group flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 text-white uppercase text-xs font-bold tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/5 transition-all"
+                >
+                  <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                  Previous
+                </button>
+                
+                <span className="font-mono text-sm text-slate-500 font-bold">
+                  {webPage} <span className="text-slate-700">/</span> {maxWebPages}
+                </span>
+
+                <button 
+                  onClick={() => {
+                    setWebPage(p => Math.min(maxWebPages, p + 1));
+                    window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: "smooth" });
+                  }}
+                  disabled={webPage === maxWebPages}
+                  className="group flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 text-white uppercase text-xs font-bold tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/5 transition-all"
+                >
+                  Next
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+            )}
           </div>
         )}
 
@@ -337,18 +388,25 @@ export function WorksMatrix() {
         {activeTab === "audio" && (
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {artists.map((artist) => (
+              {displayedAudio.map((artist) => (
                 <div
                   key={artist.id}
                   className="relative flex flex-col w-full rounded-[2rem] bg-slate-900 border border-white/10 overflow-hidden shadow-2xl group hover:border-emerald-500/50 transition-colors duration-500"
                 >
-                  {/* Placeholder Artist Graphic / Visual Boundary Engine */}
-                  <div className="w-full h-64 bg-slate-950 relative overflow-hidden flex items-center justify-center">
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent z-10"></div>
-                    <Mic2 className="w-24 h-24 text-slate-800 absolute opacity-50 z-0 scale-150 transform -translate-y-4" />
-                    <span className="absolute bottom-4 left-6 z-20 flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-emerald-500">
-                      <CheckCircle2 className="w-4 h-4" /> High-Value Node
-                    </span>
+                  {/* Native High-Resolution Artist Graphic Engine mapping absolute physics */}
+                  <div className="w-full h-64 md:h-72 bg-slate-950 relative overflow-hidden flex items-center justify-center will-change-transform">
+                     <img 
+                       src={artist.image} 
+                       alt={artist.name} 
+                       className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 ease-out select-none pointer-events-none mix-blend-luminosity opacity-[0.55] scale-100 group-hover:scale-110 group-hover:opacity-100 group-hover:mix-blend-normal"
+                       loading="lazy"
+                     />
+                     {/* Subtracted Gradient Engine preserving dark-mode UX rules */}
+                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-70 pointer-events-none"></div>
+                     
+                     <span className="absolute bottom-4 left-6 z-20 flex items-center gap-2 text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 drop-shadow-md">
+                       <CheckCircle2 className="w-4 h-4" /> High-Value Node
+                     </span>
                   </div>
 
                   {/* Milestone Matrix execution blocks */}
@@ -383,6 +441,39 @@ export function WorksMatrix() {
                 </div>
               ))}
             </div>
+
+            {/* Strict Pagination Mechanics for Audio Networking */}
+            {maxAudioPages > 1 && (
+              <div className="w-full flex items-center justify-between py-12 border-t border-white/5 mt-12">
+                <button 
+                  onClick={() => {
+                    setAudioPage(p => Math.max(1, p - 1));
+                    window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: "smooth" });
+                  }}
+                  disabled={audioPage === 1}
+                  className="group flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 text-white uppercase text-xs font-bold tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/5 transition-all"
+                >
+                  <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                  Prev
+                </button>
+                
+                <span className="font-mono text-sm text-slate-500 font-bold">
+                  {audioPage} <span className="text-slate-700">/</span> {maxAudioPages}
+                </span>
+
+                <button 
+                  onClick={() => {
+                    setAudioPage(p => Math.min(maxAudioPages, p + 1));
+                    window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: "smooth" });
+                  }}
+                  disabled={audioPage === maxAudioPages}
+                  className="group flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 text-white uppercase text-xs font-bold tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/5 transition-all"
+                >
+                  Next
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
