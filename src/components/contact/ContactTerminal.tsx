@@ -39,7 +39,7 @@ export function ContactTerminal() {
         status: "pending_review"
       });
       setIsSuccess(true);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Firestore Upload Error", error);
       setErrorMsg("Transmission failed. Secure channel compromised or Firebase DB offline.");
     } finally {
@@ -109,11 +109,11 @@ export function ContactTerminal() {
              </div>
 
              {/* RIGHT COLUMN: The Glassmorphism Terminal */}
-             <div className="col-span-1 lg:col-span-8 bg-slate-900/40 backdrop-blur-3xl border border-white/5 rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 shadow-2xl relative overflow-hidden">
+             <div className="col-span-1 lg:col-span-8 bg-slate-900/60 backdrop-blur-xl border border-white/5 rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 shadow-2xl relative overflow-hidden">
                 
-                {/* 100k Agency Dynamic Ambient Mesh Lighting natively expanding behind the Glass */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen opacity-40 animate-[pulse_8s_ease-in-out_infinite]"></div>
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen opacity-40"></div>
+                {/* Static Agency Ambient Lighting (GPU Optimized: No Animate, No Mix-Blend) */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none opacity-40"></div>
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none opacity-40"></div>
                 
                 {/* Visual Glare */}
                 <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
