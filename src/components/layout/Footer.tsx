@@ -54,10 +54,14 @@ export function Footer() {
         {/* Massive Space Legal Footer Handoff */}
         <div className="mt-20 md:mt-28 flex flex-col items-start justify-between gap-6 text-xs text-slate-500 md:flex-row md:items-center border-t border-slate-900 pt-8">
           <p>&copy; {new Date().getFullYear()} CV Digitals. All rights reserved.</p>
-          <div className="flex space-x-6 font-medium">
-            <Link to="/privacy" className="transition-colors duration-300 hover:text-slate-300">Privacy Policy</Link>
-            <Link to="/terms" className="transition-colors duration-300 hover:text-slate-300">Terms of Service</Link>
-          </div>
+          <ul className="flex space-x-6 font-medium">
+            <li>
+              <Link to="/privacy" className="hover:text-white transition-colors">Privacy Protocol</Link>
+            </li>
+            <li>
+              <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            </li>
+          </ul>
         </div>
         
       </div>
