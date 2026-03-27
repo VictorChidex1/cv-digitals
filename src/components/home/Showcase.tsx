@@ -1,14 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  ArrowUpRight,
-  Activity,
-  Cpu,
-  Hexagon,
-  Fingerprint,
-  Wallet,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,9 +12,9 @@ const projects = [
     category: "Health-Tech Infrastructure",
     description:
       "Engineered a high-conversion, hyper-fast digital landing experience optimized for patient acquisition and performance metrics.",
-    Icon: Activity,
-    gradient: "from-blue-500/20 via-slate-900/50 to-slate-950",
-    glow: "group-hover:shadow-[0_0_60px_rgba(59,130,246,0.2)]",
+    image: "/assets/oxygen-health.webp",
+    gradient: "from-blue-900/60",
+    glow: "group-hover:shadow-[0_0_60px_rgba(59,130,246,0.3)]",
     textColor: "text-blue-400",
     link: "https://oxygen-health-11.web.app/"
   },
@@ -31,9 +24,9 @@ const projects = [
     category: "Machine Learning Portal",
     description:
       "Designing the unified auditory intelligence framework for next-generation neural networking.",
-    Icon: Cpu,
-    gradient: "from-emerald-500/20 via-slate-900/50 to-slate-950",
-    glow: "group-hover:shadow-[0_0_60px_rgba(16,185,129,0.2)]",
+    image: "/assets/veravox.webp",
+    gradient: "from-emerald-900/60",
+    glow: "group-hover:shadow-[0_0_60px_rgba(16,185,129,0.3)]",
     textColor: "text-emerald-400",
     link: "https://vevavox-ai.vercel.app/"
   },
@@ -43,23 +36,23 @@ const projects = [
     category: "Enterprise Headless Commerce",
     description:
       "Executing a complex, large-scale headless CMS architecture designed for infinite scalability and high-volume nationwide distribution.",
-    Icon: Hexagon,
-    gradient: "from-amber-500/20 via-slate-900/50 to-slate-950",
-    glow: "group-hover:shadow-[0_0_60px_rgba(245,158,11,0.2)]",
+    image: "/assets/canman-hero.webp",
+    gradient: "from-amber-900/60",
+    glow: "group-hover:shadow-[0_0_60px_rgba(245,158,11,0.3)]",
     textColor: "text-amber-400",
     link: "https://canmancan.com/careers/"
   },
   {
     id: 4,
-    client: "Quantum Sound",
-    category: "Algorithmic Music Promo",
+    client: "Raploard",
+    category: "Digital Streaming Architecture",
     description:
       "Engineering viral data paths and global streaming automation modules for sovereign artists.",
-    Icon: Fingerprint,
-    gradient: "from-rose-500/20 via-slate-900/50 to-slate-950",
-    glow: "group-hover:shadow-[0_0_60px_rgba(243,24,113,0.2)]",
+    image: "/assets/raploard.webp",
+    gradient: "from-rose-900/60",
+    glow: "group-hover:shadow-[0_0_60px_rgba(243,24,113,0.3)]",
     textColor: "text-rose-400",
-    link: "#"
+    link: "https://raploard.com"
   },
   {
     id: 5,
@@ -67,9 +60,9 @@ const projects = [
     category: "FinTech & Offline-First PWA",
     description:
       "Developed a blazing-fast, offline-first Progressive Web App operating as a complete digital ledger and business OS for emerging markets.",
-    Icon: Wallet,
-    gradient: "from-emerald-600/20 via-slate-900/50 to-slate-950",
-    glow: "group-hover:shadow-[0_0_60px_rgba(5,150,105,0.2)]",
+    image: "/assets/kudiflow.webp",
+    gradient: "from-emerald-800/60",
+    glow: "group-hover:shadow-[0_0_60px_rgba(5,150,105,0.3)]",
     textColor: "text-emerald-500",
     link: "https://kudiflow.vercel.app/"
   },
@@ -102,27 +95,16 @@ export function Showcase() {
         ease: "none",
       });
 
-      // 3. High-End Mouse Interactions (Magnetic Cursors & 3D CSS Parallax variables)
+      // 3. High-End Mouse Interactions (Magnetic Cursors)
       const wrap = trackWrapRef.current;
       if (!wrap) return;
 
-      // GSAP quickTo provides butter-smooth execution identical to WebGL pointer tracking
       const xTo = gsap.quickTo(".magnetic-cursor", "x", { duration: 0.3, ease: "power3" });
       const yTo = gsap.quickTo(".magnetic-cursor", "y", { duration: 0.3, ease: "power3" });
 
       const handleMouseMove = (e: MouseEvent) => {
-        // Intercept native Mouse Coordinates targeting the viewport
         xTo(e.clientX);
         yTo(e.clientY);
-
-        // Calculate heavily optimized absolute normalized positions (-1 to 1 matrix map)
-        const rect = wrap.getBoundingClientRect();
-        const xNorm = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-        const yNorm = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-
-        // Push to relative DOM variables (Preventing heavy React re-renders while animating)
-        wrap.style.setProperty('--mouse-x', xNorm.toString());
-        wrap.style.setProperty('--mouse-y', yNorm.toString());
       };
 
       const handleMouseEnter = () => {
@@ -183,25 +165,24 @@ export function Showcase() {
             className="marquee-track flex w-max shrink-0 gap-6 md:gap-12 px-3 md:px-6"
           >
             {projects.map((project, index) => {
-              const Icon = project.Icon;
               return (
                 <div
                   key={`${sequenceId}-${project.id}`}
-                  className={`group relative flex h-[60vh] md:h-[65vh] w-[85vw] md:w-[60vw] lg:w-[45vw] xl:w-[40vw] max-w-4xl flex-col justify-end overflow-hidden rounded-[2rem] border border-white/5 bg-gradient-to-br ${project.gradient} p-8 md:p-12 transition-all duration-700 hover:border-white/10 ${project.glow} shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]`}
+                  className={`group relative flex h-[60vh] md:h-[65vh] w-[85vw] md:w-[60vw] lg:w-[45vw] xl:w-[40vw] max-w-4xl flex-col justify-end overflow-hidden rounded-[2rem] border border-white/5 bg-slate-950 p-8 md:p-12 transition-all duration-700 hover:border-white/10 ${project.glow} shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]`}
                 >
-                  {/* Embedded Abstract Geometric Parallax Tracker */}
-                  <div 
-                    className="absolute -top-12 -right-12 z-0 opacity-[0.03] transition-opacity duration-700 group-hover:opacity-[0.08]"
-                    style={{ transform: 'translate(calc(var(--mouse-x, 0) * -80px), calc(var(--mouse-y, 0) * -80px))' }}
-                  >
-                    <Icon
-                      className="h-96 w-96 md:h-[35rem] md:w-[35rem] stroke-white transition-transform duration-700 group-hover:scale-110 group-hover:rotate-12"
-                      strokeWidth={1}
-                    />
-                  </div>
+                  {/* High-End Cinematic Image Plate */}
+                  <img
+                    src={project.image}
+                    alt={project.client}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110 z-0 opacity-40 group-hover:opacity-50 grayscale-[20%]"
+                  />
+                  
+                  {/* Structural Dark Gradients ensuring text readability */}
+                  <div className={`absolute inset-0 bg-gradient-to-t ${project.gradient} to-transparent mix-blend-multiply z-10 transition-opacity duration-700 opacity-60 group-hover:opacity-80`}></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent z-10 block"></div>
 
                   {/* Sub-Interface Number Identifier */}
-                  <div className="absolute top-8 left-8 z-20 font-mono text-xl md:text-2xl font-bold tracking-tighter text-white/20 transition-colors duration-500 group-hover:text-white/40">
+                  <div className="absolute top-8 left-8 z-20 font-mono text-xl md:text-2xl font-bold tracking-tighter text-white/30 transition-colors duration-500 group-hover:text-white/60">
                     /0{index + 1}
                   </div>
 
