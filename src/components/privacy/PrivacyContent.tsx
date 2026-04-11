@@ -423,8 +423,8 @@ export function PrivacyContent() {
                 </div>
                 <div className="text-slate-300 leading-relaxed font-light md:text-lg space-y-6">
                   <p>
-                    Because our clients exist globally—from Africa to Europe to
-                    the United States—we voluntarily adhere to the strictest
+                    Because our clients exist globally, from Africa to Europe to
+                    the United States, we voluntarily adhere to the strictest
                     data protection laws in the world (such as Europe's GDPR and
                     California's CCPA).
                   </p>
