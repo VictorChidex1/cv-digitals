@@ -45,3 +45,39 @@
 - [ ] Scaffold `functions/.env` for secure API key storage.
 - [ ] Build the `sendContactEmail` Firebase Cloud Function (TypeScript).
 - [ ] Connect the frontend Zod/React Hook Form to the local Cloud Function.
+
+## Phase: SEO Production Switch (Post-Blaze Upgrade)
+
+- [ ] **Upgrade Plan:** Purchase definitive `.com` domain and upgrade Firebase project to Blaze (Pay-as-you-go).
+- [ ] **Activate Interceptor:** Rewrite `firebase.json` to logically ignore `index.html` in hosting and route `**` traffic to the `seoInterceptor` Cloud Function.
+- [ ] **Final Deploy:** Run `npm run build:firebase` (or `npm run build`) and execute `firebase deploy` to launch the backend Interceptor and cement production SEO.
+
+{
+"hosting": {
+"public": "dist",
+"ignore": [
+"firebase.json",
+"**/.*",
+"**/node_modules/**",
+"index.html" // 1. ADD THIS LINE
+],
+"rewrites": [
+{
+"source": "**",
+"function": "seoInterceptor" // 2. CHANGE DESTINATION TO FUNCTION
+}
+]
+},
+"functions": [ // 3. ADD THIS ENTIRE FUNCTIONS BLOCK AT THE BOTTOM
+{
+"source": "functions",
+"codebase": "default",
+"ignore": [
+"node_modules",
+".git",
+"firebase-debug.log",
+"firebase-debug.*.log"
+]
+}
+]
+}

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "postbuild": "npm --prefix functions install && npm run build --prefix functions && cp dist/index.html functions/lib/app.html",
     "lint": "eslint .",
     "preview": "vite preview"
   },

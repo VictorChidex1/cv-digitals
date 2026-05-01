@@ -16,46 +16,10 @@ const projects = [
     gradient: "from-blue-900/60",
     glow: "group-hover:shadow-[0_0_60px_rgba(59,130,246,0.3)]",
     textColor: "text-blue-400",
-    link: "https://oxygen-health-11.web.app/"
+    link: "https://oxygen-health-11.web.app/",
   },
   {
     id: 2,
-    client: "VeraVox AI",
-    category: "Machine Learning Portal",
-    description:
-      "Designing the unified auditory intelligence framework for next-generation neural networking.",
-    image: "/assets/veravox.webp",
-    gradient: "from-emerald-900/60",
-    glow: "group-hover:shadow-[0_0_60px_rgba(16,185,129,0.3)]",
-    textColor: "text-emerald-400",
-    link: "https://vevavox-ai.vercel.app/"
-  },
-  {
-    id: 3,
-    client: "The Can Man",
-    category: "Enterprise Headless Commerce",
-    description:
-      "Executing a complex, large-scale headless CMS architecture designed for infinite scalability and high-volume nationwide distribution.",
-    image: "/assets/canman-hero.webp",
-    gradient: "from-amber-900/60",
-    glow: "group-hover:shadow-[0_0_60px_rgba(245,158,11,0.3)]",
-    textColor: "text-amber-400",
-    link: "https://canmancan.com/careers/"
-  },
-  {
-    id: 4,
-    client: "Raploard",
-    category: "Digital Streaming Architecture",
-    description:
-      "Engineering viral data paths and global streaming automation modules for sovereign artists.",
-    image: "/assets/raploard.webp",
-    gradient: "from-rose-900/60",
-    glow: "group-hover:shadow-[0_0_60px_rgba(243,24,113,0.3)]",
-    textColor: "text-rose-400",
-    link: "https://raploard.com"
-  },
-  {
-    id: 5,
     client: "KudiFlow",
     category: "FinTech & Offline-First PWA",
     description:
@@ -64,7 +28,43 @@ const projects = [
     gradient: "from-emerald-800/60",
     glow: "group-hover:shadow-[0_0_60px_rgba(5,150,105,0.3)]",
     textColor: "text-emerald-500",
-    link: "https://kudiflow.vercel.app/"
+    link: "https://kudiflow.vercel.app/",
+  },
+  {
+    id: 3,
+    client: "VeraVox AI",
+    category: "Machine Learning Portal",
+    description:
+      "Designing the unified auditory intelligence framework for next-generation neural networking.",
+    image: "/assets/veravox.webp",
+    gradient: "from-emerald-900/60",
+    glow: "group-hover:shadow-[0_0_60px_rgba(16,185,129,0.3)]",
+    textColor: "text-emerald-400",
+    link: "https://vevavox-ai.vercel.app/",
+  },
+  {
+    id: 4,
+    client: "The Can Man",
+    category: "Enterprise Headless Commerce",
+    description:
+      "Executing a complex, large-scale headless CMS architecture designed for infinite scalability and high-volume nationwide distribution.",
+    image: "/assets/canman-hero.webp",
+    gradient: "from-amber-900/60",
+    glow: "group-hover:shadow-[0_0_60px_rgba(245,158,11,0.3)]",
+    textColor: "text-amber-400",
+    link: "https://canmancan.com/careers/",
+  },
+  {
+    id: 5,
+    client: "Raploard",
+    category: "Digital Streaming Architecture",
+    description:
+      "Engineering viral data paths and global streaming automation modules for sovereign artists.",
+    image: "/assets/raploard.webp",
+    gradient: "from-rose-900/60",
+    glow: "group-hover:shadow-[0_0_60px_rgba(243,24,113,0.3)]",
+    textColor: "text-rose-400",
+    link: "https://raploard.com",
   },
 ];
 
@@ -99,8 +99,14 @@ export function Showcase() {
       const wrap = trackWrapRef.current;
       if (!wrap) return;
 
-      const xTo = gsap.quickTo(".magnetic-cursor", "x", { duration: 0.3, ease: "power3" });
-      const yTo = gsap.quickTo(".magnetic-cursor", "y", { duration: 0.3, ease: "power3" });
+      const xTo = gsap.quickTo(".magnetic-cursor", "x", {
+        duration: 0.3,
+        ease: "power3",
+      });
+      const yTo = gsap.quickTo(".magnetic-cursor", "y", {
+        duration: 0.3,
+        ease: "power3",
+      });
 
       const handleMouseMove = (e: MouseEvent) => {
         xTo(e.clientX);
@@ -108,7 +114,12 @@ export function Showcase() {
       };
 
       const handleMouseEnter = () => {
-        gsap.to(".magnetic-cursor", { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" });
+        gsap.to(".magnetic-cursor", {
+          scale: 1,
+          opacity: 1,
+          duration: 0.3,
+          ease: "back.out(1.7)",
+        });
         infiniteScroller.pause();
       };
 
@@ -126,7 +137,6 @@ export function Showcase() {
         wrap.removeEventListener("mouseenter", handleMouseEnter);
         wrap.removeEventListener("mouseleave", handleMouseLeave);
       };
-
     }, containerRef);
 
     return () => ctx.revert();
@@ -139,7 +149,9 @@ export function Showcase() {
     >
       {/* Absolute Cinematic Magnetic Pointer Layer */}
       <div className="magnetic-cursor pointer-events-none fixed left-0 top-0 z-[100] flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 scale-0 items-center justify-center rounded-full bg-white/10 opacity-0 backdrop-blur-md border border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-        <span className="text-[10px] font-bold tracking-[0.2em] text-white">INTERACT</span>
+        <span className="text-[10px] font-bold tracking-[0.2em] text-white">
+          INTERACT
+        </span>
       </div>
 
       <div className="container mx-auto px-4 md:px-8 mb-16 md:mb-20 z-20">
@@ -176,9 +188,11 @@ export function Showcase() {
                     alt={project.client}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110 z-0 opacity-40 group-hover:opacity-50 grayscale-[20%]"
                   />
-                  
+
                   {/* Structural Dark Gradients ensuring text readability */}
-                  <div className={`absolute inset-0 bg-gradient-to-t ${project.gradient} to-transparent mix-blend-multiply z-10 transition-opacity duration-700 opacity-60 group-hover:opacity-80`}></div>
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-t ${project.gradient} to-transparent mix-blend-multiply z-10 transition-opacity duration-700 opacity-60 group-hover:opacity-80`}
+                  ></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent z-10 block"></div>
 
                   {/* Sub-Interface Number Identifier */}
@@ -189,7 +203,9 @@ export function Showcase() {
                   {/* Futuristic Absolute Glassmorphism Status Map */}
                   <div className="absolute top-8 right-8 z-20 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md opacity-0 -translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
                     <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse"></div>
-                    <span className="font-mono text-[10px] font-bold tracking-widest text-emerald-400">LIVE</span>
+                    <span className="font-mono text-[10px] font-bold tracking-widest text-emerald-400">
+                      LIVE
+                    </span>
                   </div>
 
                   <div className="relative z-20 mt-auto flex w-full flex-col">
@@ -212,7 +228,7 @@ export function Showcase() {
                       </p>
 
                       {/* Magnetic Anchor Network Node mapped to dynamic _blank endpoints */}
-                      <a 
+                      <a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"

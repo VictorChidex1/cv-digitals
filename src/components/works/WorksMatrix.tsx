@@ -6,7 +6,7 @@ import {
   TrendingUp,
   Star,
   ArrowRight,
-  ArrowLeft
+  ArrowLeft,
 } from "lucide-react";
 
 // Web Project Architecture Array
@@ -22,24 +22,6 @@ const projects = [
   },
   {
     id: 2,
-    title: "Novluma AI",
-    type: "Content Orchestration SaaS",
-    client: "B2B AI",
-    image: "/assets/novluma.webp",
-    link: "#",
-    tech: ["React", "Firebase", "Gemini API"],
-  },
-  {
-    id: 3,
-    title: "FoodFlow",
-    type: "Delivery Logistics SaaS",
-    client: "Enterprise",
-    image: "/assets/foodflow.webp",
-    link: "#",
-    tech: ["React", "Tailwind", "Vercel"],
-  },
-  {
-    id: 4,
     title: "KudiFlow",
     type: "Offline-First Smart Vendors",
     client: "B2B SaaS",
@@ -48,43 +30,16 @@ const projects = [
     tech: ["React", "Firebase", "Resend API"],
   },
   {
-    id: 5,
-    title: "The CanMan",
-    type: "Operations & Recruitment",
-    client: "Service",
-    image: "/assets/canman-hero.webp",
-    link: "https://canmancan.com/careers/",
-    tech: ["React", "Firebase", "Framer"],
-  },
-  {
-    id: 6,
-    title: "EventFlow",
-    type: "Event Booking Platform",
-    client: "Ticketing",
-    image: "/assets/eventflow.webp",
+    id: 3,
+    title: "Novluma AI",
+    type: "Content Orchestration SaaS",
+    client: "B2B AI",
+    image: "/assets/novluma.webp",
     link: "#",
-    tech: ["React", "Tailwind", "Zustand"],
-  },
-  {
-    id: 7,
-    title: "HealthPoint",
-    type: "Hospital Management",
-    client: "Healthcare",
-    image: "/assets/healthpoint.webp",
-    link: "#",
-    tech: ["React", "Tailwind", "Context API"],
-  },
-  {
-    id: 8,
-    title: "VeraVox AI",
-    type: "Automated Reputation Engine",
-    client: "Micro-SaaS",
-    image: "/assets/veravox.webp",
-    link: "https://vevavox-ai.vercel.app/",
     tech: ["React", "Firebase", "Gemini API"],
   },
   {
-    id: 9,
+    id: 4,
     title: "Raploard",
     type: "Artist Portfolio",
     client: "Music",
@@ -93,13 +48,58 @@ const projects = [
     tech: ["React", "Firebase", "Framer"],
   },
   {
-    id: 10,
+    id: 5,
     title: "Kelvin's Grid",
     type: "Solar Utility Platform",
     client: "Energy",
     image: "/assets/kelvins-grid.webp",
     link: "#",
     tech: ["React", "Firebase", "Zustand"],
+  },
+  {
+    id: 6,
+    title: "The CanMan",
+    type: "Operations & Recruitment",
+    client: "Service",
+    image: "/assets/canman-hero.webp",
+    link: "https://canmancan.com/careers/",
+    tech: ["React", "Firebase", "Framer"],
+  },
+  {
+    id: 7,
+    title: "VeraVox AI",
+    type: "Automated Reputation Engine",
+    client: "Micro-SaaS",
+    image: "/assets/veravox.webp",
+    link: "https://vevavox-ai.vercel.app/",
+    tech: ["React", "Firebase", "Gemini API"],
+  },
+  {
+    id: 8,
+    title: "EventFlow",
+    type: "Event Booking Platform",
+    client: "Ticketing",
+    image: "/assets/eventflow.webp",
+    link: "#",
+    tech: ["React", "Tailwind", "Zustand"],
+  },
+  {
+    id: 9,
+    title: "HealthPoint",
+    type: "Hospital Management",
+    client: "Healthcare",
+    image: "/assets/healthpoint.webp",
+    link: "#",
+    tech: ["React", "Tailwind", "Context API"],
+  },
+  {
+    id: 10,
+    title: "FoodFlow",
+    type: "Delivery Logistics SaaS",
+    client: "Enterprise",
+    image: "/assets/foodflow.webp",
+    link: "#",
+    tech: ["React", "Tailwind", "Vercel"],
   },
 ];
 
@@ -162,8 +162,14 @@ export function WorksMatrix() {
   const maxWebPages = Math.ceil(projects.length / WEB_PER_PAGE);
   const maxAudioPages = Math.ceil(artists.length / AUDIO_PER_PAGE);
 
-  const displayedWeb = projects.slice((webPage - 1) * WEB_PER_PAGE, webPage * WEB_PER_PAGE);
-  const displayedAudio = artists.slice((audioPage - 1) * AUDIO_PER_PAGE, audioPage * AUDIO_PER_PAGE);
+  const displayedWeb = projects.slice(
+    (webPage - 1) * WEB_PER_PAGE,
+    webPage * WEB_PER_PAGE
+  );
+  const displayedAudio = artists.slice(
+    (audioPage - 1) * AUDIO_PER_PAGE,
+    audioPage * AUDIO_PER_PAGE
+  );
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLElement>(null);
@@ -307,7 +313,9 @@ export function WorksMatrix() {
 
                 <div className="flex flex-col lg:flex-row items-baseline gap-4 md:gap-16 z-10 w-full lg:w-auto">
                   <span className="font-mono text-sm md:text-lg font-bold text-slate-700 transition-colors group-hover:text-blue-500">
-                    {((webPage - 1) * WEB_PER_PAGE) + i < 9 ? `0${((webPage - 1) * WEB_PER_PAGE) + i + 1}` : ((webPage - 1) * WEB_PER_PAGE) + i + 1}
+                    {(webPage - 1) * WEB_PER_PAGE + i < 9
+                      ? `0${(webPage - 1) * WEB_PER_PAGE + i + 1}`
+                      : (webPage - 1) * WEB_PER_PAGE + i + 1}
                   </span>
                   <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-slate-300 tracking-tighter transition-all duration-500 lg:group-hover:text-white lg:group-hover:translate-x-6 z-10">
                     {proj.title}
@@ -352,10 +360,13 @@ export function WorksMatrix() {
             {/* Strict Pagination Mechanics for System Architecture */}
             {maxWebPages > 1 && (
               <div className="w-full flex items-center justify-between px-4 md:px-12 py-12 border-t border-white/5">
-                <button 
+                <button
                   onClick={() => {
-                    setWebPage(p => Math.max(1, p - 1));
-                    window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: "smooth" });
+                    setWebPage((p) => Math.max(1, p - 1));
+                    window.scrollTo({
+                      top: containerRef.current?.offsetTop || 0,
+                      behavior: "smooth",
+                    });
                   }}
                   disabled={webPage === 1}
                   className="group flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 text-white uppercase text-xs font-bold tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/5 transition-all"
@@ -363,15 +374,19 @@ export function WorksMatrix() {
                   <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                   Previous
                 </button>
-                
+
                 <span className="font-mono text-sm text-slate-500 font-bold">
-                  {webPage} <span className="text-slate-700">/</span> {maxWebPages}
+                  {webPage} <span className="text-slate-700">/</span>{" "}
+                  {maxWebPages}
                 </span>
 
-                <button 
+                <button
                   onClick={() => {
-                    setWebPage(p => Math.min(maxWebPages, p + 1));
-                    window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: "smooth" });
+                    setWebPage((p) => Math.min(maxWebPages, p + 1));
+                    window.scrollTo({
+                      top: containerRef.current?.offsetTop || 0,
+                      behavior: "smooth",
+                    });
                   }}
                   disabled={webPage === maxWebPages}
                   className="group flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 text-white uppercase text-xs font-bold tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/5 transition-all"
@@ -395,18 +410,18 @@ export function WorksMatrix() {
                 >
                   {/* Native High-Resolution Artist Graphic Engine mapping absolute physics */}
                   <div className="w-full h-64 md:h-72 bg-slate-950 relative overflow-hidden flex items-center justify-center will-change-transform">
-                     <img 
-                       src={artist.image} 
-                       alt={artist.name} 
-                       className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 ease-out select-none pointer-events-none mix-blend-luminosity opacity-[0.55] scale-100 group-hover:scale-110 group-hover:opacity-100 group-hover:mix-blend-normal"
-                       loading="lazy"
-                     />
-                     {/* Subtracted Gradient Engine preserving dark-mode UX rules */}
-                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-70 pointer-events-none"></div>
-                     
-                     <span className="absolute bottom-4 left-6 z-20 flex items-center gap-2 text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 drop-shadow-md">
-                       <CheckCircle2 className="w-4 h-4" /> High-Value Node
-                     </span>
+                    <img
+                      src={artist.image}
+                      alt={artist.name}
+                      className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 ease-out select-none pointer-events-none mix-blend-luminosity opacity-[0.55] scale-100 group-hover:scale-110 group-hover:opacity-100 group-hover:mix-blend-normal"
+                      loading="lazy"
+                    />
+                    {/* Subtracted Gradient Engine preserving dark-mode UX rules */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-70 pointer-events-none"></div>
+
+                    <span className="absolute bottom-4 left-6 z-20 flex items-center gap-2 text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 drop-shadow-md">
+                      <CheckCircle2 className="w-4 h-4" /> High-Value Node
+                    </span>
                   </div>
 
                   {/* Milestone Matrix execution blocks */}
@@ -445,10 +460,13 @@ export function WorksMatrix() {
             {/* Strict Pagination Mechanics for Audio Networking */}
             {maxAudioPages > 1 && (
               <div className="w-full flex items-center justify-between py-12 border-t border-white/5 mt-12">
-                <button 
+                <button
                   onClick={() => {
-                    setAudioPage(p => Math.max(1, p - 1));
-                    window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: "smooth" });
+                    setAudioPage((p) => Math.max(1, p - 1));
+                    window.scrollTo({
+                      top: containerRef.current?.offsetTop || 0,
+                      behavior: "smooth",
+                    });
                   }}
                   disabled={audioPage === 1}
                   className="group flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 text-white uppercase text-xs font-bold tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/5 transition-all"
@@ -456,15 +474,19 @@ export function WorksMatrix() {
                   <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                   Prev
                 </button>
-                
+
                 <span className="font-mono text-sm text-slate-500 font-bold">
-                  {audioPage} <span className="text-slate-700">/</span> {maxAudioPages}
+                  {audioPage} <span className="text-slate-700">/</span>{" "}
+                  {maxAudioPages}
                 </span>
 
-                <button 
+                <button
                   onClick={() => {
-                    setAudioPage(p => Math.min(maxAudioPages, p + 1));
-                    window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: "smooth" });
+                    setAudioPage((p) => Math.min(maxAudioPages, p + 1));
+                    window.scrollTo({
+                      top: containerRef.current?.offsetTop || 0,
+                      behavior: "smooth",
+                    });
                   }}
                   disabled={audioPage === maxAudioPages}
                   className="group flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 text-white uppercase text-xs font-bold tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/5 transition-all"
